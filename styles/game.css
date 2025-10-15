@@ -1,59 +1,69 @@
-/* Variables CSS */
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --font-family: 'Arial', sans-serif;
+  --primary-color: #ff6347;
+  --secondary-color: #fff;
+  --font-family: 'Press Start 2P', cursive;
 }
 
-/* Styles de base */
 body {
   font-family: var(--font-family);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #ecf0f1;
+  background-color: #222;
+  color: var(--secondary-color);
+  text-align: center;
 }
 
 header, footer {
   background-color: var(--primary-color);
-  color: white;
   padding: 10px;
-  text-align: center;
+}
+
+nav a {
+  color: var(--secondary-color);
+  margin: 0 15px;
+  text-decoration: none;
 }
 
 #gameArea {
-  text-align: center;
+  margin-top: 50px;
 }
-
-#timeLeft {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #e74c3c;
-  margin-top: 10px;
-}
-
 
 button {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   border: none;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
+  color: var(--secondary-color);
+  font-size: 20px;
+  padding: 20px;
   cursor: pointer;
   border-radius: 5px;
-  margin: 10px;
-  transition: background-color 0.3s;
 }
 
 button:disabled {
-  background-color: #bdc3c7;
-  cursor: not-allowed;
+  background-color: #ccc;
 }
 
-button:hover:not(:disabled) {
-  background-color: #27ae60;
+footer p {
+  font-size: 14px;
 }
 
+form {
+  margin-top: 20px;
+}
+
+label, select, input {
+  margin: 5px;
+}
+
+input[type="text"], select {
+  padding: 5px;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
