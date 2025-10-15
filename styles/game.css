@@ -110,3 +110,26 @@ footer p {
   font-size: 14px;
   margin: 5px 0;
 }
+
+/* Links container with sufficient contrast */
+.links-container {
+  background-color: #cc2b00; 
+  color: #fff;               
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block;      
+  margin-top: 10px;
+}
+
+.links-container a {
+  color: #fff;               
+  text-decoration: none;
+  margin: 0 8px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.links-container a:hover,
+.links-container a:focus {
+  color: #4caf50;           
+}
