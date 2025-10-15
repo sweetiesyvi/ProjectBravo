@@ -1,43 +1,30 @@
-import { storage } from './storage.js';
+import { storage } from "./storage.js";
+
+const button = document.getElementById("clickButton");
+const scoreDisplay = document.getElementById("score");
 
 let score = 0;
-let highScore = storage.get('highScore', 0); 
-const scoreDisplay = document.getElementById('score');
-const button = document.getElementById('clickButton');
+let highScore = storage.get("highScore", 0);
 
+console.log(`Your current best score is ${highScore}. Try to beat it! 🔥`);
 
-window.addEventListener('DOMContentLoaded', () => {
-  console.log("Welcome to Click Click Click 🎮");
-  console.log("💡 Try typing 'theme()' in the console for a surprise!");
-  updateScoreDisplay();
-});
-
-
-button.addEventListener('click', () => {
+button.addEventListener("click", () => {
   score++;
-  updateScoreDisplay();
-  checkHighScore();
-});
+  scoreDisplay.textContent = score;
 
-function updateScoreDisplay() {
-  scoreDisplay.textContent = `${score} (Best: ${highScore})`;
-}
-
-function checkHighScore() {
   if (score > highScore) {
     highScore = score;
-    storage.set('highScore', highScore);
+    storage.set("highScore", highScore);
   }
-}
-
-document.querySelector('a[href="#game"]').addEventListener('click', () => {
-  score = 0;
-  updateScoreDisplay();
 });
 
+document.querySelector('a[href="#game"]').addEventListener("click", () => {
+  score = 0;
+  scoreDisplay.textContent = score;
+});
 
-window.theme = function() {
-  document.body.style.backgroundColor =
-    document.body.style.backgroundColor === 'black' ? '#222' : 'black';
-  console.log("🌙 Theme toggled! You found the Easter Egg!");
+console.log("💡 Hint: Type 'themeSwap()' in the console to change theme!");
+
+window.themeSwap = () => {
+  document.body.classList.toggle("alt-theme");
 };
