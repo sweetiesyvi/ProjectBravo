@@ -1,11 +1,20 @@
-export function savePlayerName(name) {
-  localStorage.setItem('playerName', name);
-  playerNameInput.value = loadPlayerName();
-
+export function saveScore(score) {
+  if (typeof(Storage) !== 'undefined') {
+    localStorage.setItem('bestScore', score);
+  }
 }
 
-export function loadPlayerName() {
-  return localStorage.getItem('playerName') || '';
+export function getBestScore() {
+  if (typeof(Storage) !== 'undefined') {
+    const score = localStorage.getItem('bestScore');
+    return score ? parseInt(score, 10) : 0;
+  }
+  return 0;
 }
 
-
+export function updateBestScore(currentScore) {
+  const bestScore = getBestScore();
+  if (currentScore > bestScore) {
+    saveScore(currentScore);
+  }
+}
