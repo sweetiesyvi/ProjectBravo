@@ -1,78 +1,28 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Click Fast Game</title>
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Custom CSS -->
+  <title>Click Click Challenge</title>
   <link rel="stylesheet" href="styles/game.css">
 </head>
 <body>
-  <header class="bg-primary text-white p-3">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <a class="navbar-brand" href="#">Click Fast</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#" id="playBtn">Play/Reset</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#howToPlay">How to Play</a></li>
-          <li class="nav-item"><a class="nav-link" href="https://github.com/TONPROFIL" target="_blank">Dev Profile</a></li>
-        </ul>
-      </div>
+  <header>
+    <nav>
+      <button id="startBtn">Démarrer le jeu</button>
+      <button id="resetBtn" disabled>Réinitialiser</button>
     </nav>
   </header>
-
-  <main class="container my-4">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card text-center p-3">
-          <h2>Timer: <span id="timer">10</span>s</h2>
-          <h3>Score: <span id="score">0</span></h3>
-          <button id="clickBtn" class="btn btn-success btn-lg mt-3">Click Me!</button>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <form id="playerForm">
-          <div class="mb-3">
-            <label for="playerName" class="form-label">Your Name</label>
-            <input type="text" class="form-control" id="playerName" required>
-            <div class="invalid-feedback">Name is required!</div>
-          </div>
-          <button type="submit" class="btn btn-primary">Save Name</button>
-        </form>
-      </div>
+  <main>
+    <div id="gameArea">
+      <p id="timer">Temps restant : 30s</p>
+      <p id="score">Score : 0</p>
+      <button id="clickBtn" disabled>Cliquez-moi !</button>
     </div>
   </main>
-
-  <!-- How to Play Modal -->
-  <div class="modal fade" id="howToPlay" tabindex="-1" aria-labelledby="howToPlayLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="howToPlayLabel">How to Play</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          Click the green button as fast as you can before the timer runs out. Try to beat your high score!
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer class="bg-light text-center p-3 mt-4">
-    <a href="https://github.com/TONPROFIL" target="_blank">GitHub Profile</a> |
-    <a href="https://TONPROJET.github.io" target="_blank">Game Repo</a>
+  <footer>
+    <p>Développé par [Votre Nom]</p>
   </footer>
-
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Game Scripts -->
   <script type="module" src="scripts/game.js"></script>
 </body>
 </html>
