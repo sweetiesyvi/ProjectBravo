@@ -3,80 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Click Frenzy</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Click Click Click - click game</title>
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+ 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+
   <link rel="stylesheet" href="styles/game.css">
 </head>
 <body>
+  <!-- Header with Navbar -->
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Click Frenzy</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <button class="btn btn-primary" id="startButton">Start Game</button>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-info" id="howToPlayButton" data-bs-toggle="modal" data-bs-target="#howToPlayModal">How to Play</button>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-secondary" href="https://github.com/yourusername" target="_blank">My GitHub</a>
-          </li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Click Click Click</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#game">Play / Reset</a></li>
+            <li class="nav-item"><a class="nav-link" href="pages/instructions.html">How to Play</a></li>
+            <li class="nav-item"><a class="nav-link" href="pages/settings.html">Settings</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
   </header>
 
-  <main class="container">
-    <div class="row">
-      <div class="col">
-        <h2>Game Area</h2>
-        <p id="scoreDisplay">Score: 0</p>
-        <p id="timerDisplay">Time Left: 10</p>
-        <button class="btn btn-success" id="clickButton" disabled>Click Me!</button>
-      </div>
-    </div>
+  <!-- Main Game Area -->
+  <main id="game" class="container text-center my-5">
+    <h1 class="mb-4">Jeu de Clic</h1>
+    <button id="clickButton" class="btn btn-success btn-lg mb-3">Click !</button>
+    <p>Score : <span id="score" aria-live="polite">0</span></p>
   </main>
 
-  <footer class="bg-light text-center py-3">
-    <p>Developed by Your Name</p>
-    <p><a href="https://validator.w3.org/check?uri=referer" target="_blank">Validate HTML</a> | <a href="https://wave.webaim.org/report#/your-deployed-url" target="_blank">Check Accessibility</a></p>
+  <!-- Footer -->
+  <footer class="bg-dark text-light text-center py-3">
+    <p>
+      <a href="https://github.com/sweetiesyvi/ProjectBravo" class="text-light">Game Repo</a> | 
+      <a href="https://github.com/sweetiesyvi" class="text-light">GitHub Profile</a> | 
+      <a href="https://validator.w3.org/nu/?doc=https://sweetiesyvi.github.io/ProjectBravo/" class="text-light" target="_blank">Nu HTML Validator</a> | 
+      <a href="https://wave.webaim.org/report#/https://sweetiesyvi.github.io/ProjectBravo/" class="text-light" target="_blank">WAVE Accessibility</a>
+    </p>
   </footer>
 
-  <!-- How to Play Modal -->
-  <div class="modal fade" id="howToPlayModal" tabindex="-1" aria-labelledby="howToPlayModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="howToPlayModalLabel">How to Play</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Click the "Click Me!" button as many times as you can before the timer runs out. The faster you click, the higher your score!</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<form id="settingsForm">
-  <label for="playerName">Nom du joueur :</label>
-  <input type="text" id="playerName" name="playerName" required>
-  <label for="difficulty">Difficulté :</label>
-  <select id="difficulty" name="difficulty" required>
-    <option value="easy">Facile</option>
-    <option value="medium">Moyenne</option>
-    <option value="hard">Difficile</option>
-  </select>
-  <button type="submit">Sauvegarder</button>
-</form>
-  
-  <script type="module" src="scripts/main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script type="module" src="scripts/game.js"></script>
 </body>
 </html>
