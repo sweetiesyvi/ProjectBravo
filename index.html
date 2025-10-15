@@ -1,32 +1,22 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jeu de Réaction</title>
+  <title>Jeu Click Click</title>
   <link rel="stylesheet" href="game.css">
 </head>
 <body>
   <div id="game">
-    <h1 id="displayName">Joueur</h1>
-    <div class="target wait" id="target">
-      <span id="targetLabel">Attendez le vert...</span>
+    <h1>Jeu Click Click</h1>
+    <p>Temps restant : <span id="timer">10</span> secondes</p>
+    <p>Score : <span id="score">0</span></p>
+    <button id="startBtn">Démarrer</button>
+    <div id="clickArea" class="target" tabindex="0">
+      <span id="targetLabel">Cliquez ici !</span>
     </div>
-    <div id="controls">
-      <button id="startRound" class="btn">Démarrer</button>
-      <button id="stopRound" class="btn" disabled>Arrêter</button>
-    </div>
-    <div id="stats">
-      <p>Meilleur temps : <span id="bestTime">—</span></p>
-      <p>Dernier temps : <span id="lastTime">—</span></p>
-      <p>Essais : <span id="attempts">0</span></p>
-    </div>
-    <div id="progress">
-      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-    </div>
-    <div id="message"></div>
+    <p id="message"></p>
   </div>
   <script type="module" src="game.js"></script>
 </body>
 </html>
-
