@@ -1,64 +1,69 @@
-import { savePlayerName, loadPlayerName } from './storage.js';
+// Variables globales
+let score = 0;
+let timeLeft = 30;
+let timerInterval;
+let gameActive = false;
 
-document.addEventListener('DOMContentLoaded', () => {
-  let score = 0;
-  let timer = 10;
-  let interval;
-  
-  const clickBtn = document.getElementById('clickBtn');
-  const scoreDisplay = document.getElementById('score');
-  const timerDisplay = document.getElementById('timer');
-  const playBtn = document.getElementById('playBtn');
-  const playerForm = document.getElementById('playerForm');
-  const playerNameInput = document.getElementById('playerName');
+// Sélection des éléments DOM
+const startBtn = document.getElementById('startBtn');
+const resetBtn = document.getElementById('resetBtn');
+const clickBtn = document.getElementById('clickBtn');
+const timerDisplay = document.getElementById('timer');
+const scoreDisplay = document.getElementById('score');
 
-  // Load player name from storage
-  playerNameInput.value = loadPlayerName();
+// Fonction pour démarrer le jeu
+function startGame() {
+  score = 0;
+  timeLeft = 30;
+  gameActive = true;
+  startBtn.disabled = true;
+  resetBtn.disabled = false;
+  clickBtn.disabled = false;
+  clickBtn.textContent = 'Cliquez-moi !';
+  updateScore();
+  updateTimer();
+  timerInterval = setInterval(updateTimer, 1000);
+}
 
-  // Easter Egg
-  console.log("Hint: Try typing 'FAST' in the name field for a surprise!");
+// Fonction pour réinitialiser le jeu
+function resetGame() {
+  clearInterval(timerInterval);
+  gameActive = false;
+  startBtn.disabled = false;
+  resetBtn.disabled = true;
+  clickBtn.disabled = true;
+  clickBtn.textContent = 'Cliquez-moi !';
+  timerDisplay.textContent = 'Temps restant : 30s';
+  scoreDisplay.textContent = 'Score : 0';
+}
 
-  // Start or Reset Game
-  function startGame() {
-    score = 0;
-    timer = 10;
-    scoreDisplay.textContent = score;
-    timerDisplay.textContent = timer;
-    clickBtn.disabled = false;
+// Fonction pour mettre à jour le score
+function updateScore() {
+  scoreDisplay.textContent = `Score : ${score}`;
+}
 
-    clearInterval(interval);
-    interval = setInterval(() => {
-      timer--;
-      timerDisplay.textContent = timer;
-      if (timer <= 0) {
-        clearInterval(interval);
-        clickBtn.disabled = true;
-        alert(`Time's up! Your score: ${score}`);
-      }
-    }, 1000);
+// Fonction pour mettre à jour le timer
+function updateTimer() {
+  if (timeLeft > 0) {
+    timeLeft--;
+    timerDisplay.textContent = `Temps restant : ${timeLeft}s`;
+  } else {
+    clearInterval(timerInterval);
+    gameActive = false;
+    clickBtn.disabled = true;
+    clickBtn.textContent = 'Temps écoulé !';
   }
+}
 
-  // Click Event
-  clickBtn.addEventListener('click', () => {
+// Fonction pour gérer les clics sur le bouton
+function handleClick() {
+  if (gameActive) {
     score++;
-    scoreDisplay.textContent = score;
-  });
+    updateScore();
+  }
+}
 
-  // Play/Reset Button
-  playBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    startGame();
-  });
-
-  // Form Submit
-  playerForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (!playerNameInput.checkValidity()) {
-      playerNameInput.classList.add('is-invalid');
-      return;
-    }
-    playerNameInput.classList.remove('is-invalid');
-    savePlayerName(playerNameInput.value);
-    alert(`Hello ${playerNameInput.value}! Name saved.`);
-  });
-});
+// Événements
+startBtn.addEventListener('click', startGame);
+resetBtn.addEventListener('click', resetGame);
+clickBtn.addEventListener('click', handleClick);
