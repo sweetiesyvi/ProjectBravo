@@ -1,73 +1,43 @@
-import { saveScore, getBestScore, updateBestScore } from './storage.js';
+import { storage } from './storage.js';
 
-// Variables globales
 let score = 0;
-let timeLeft = 10;
-let timerInterval;
+let highScore = storage.get('highScore', 0); 
+const scoreDisplay = document.getElementById('score');
+const button = document.getElementById('clickButton');
 
-// Fonction pour démarrer le jeu
-function startGame() {
+
+window.addEventListener('DOMContentLoaded', () => {
+  console.log("Welcome to Click Click Click 🎮");
+  console.log("💡 Try typing 'theme()' in the console for a surprise!");
+  updateScoreDisplay();
+});
+
+
+button.addEventListener('click', () => {
+  score++;
+  updateScoreDisplay();
+  checkHighScore();
+});
+
+function updateScoreDisplay() {
+  scoreDisplay.textContent = `${score} (Best: ${highScore})`;
+}
+
+function checkHighScore() {
+  if (score > highScore) {
+    highScore = score;
+    storage.set('highScore', highScore);
+  }
+}
+
+document.querySelector('a[href="#game"]').addEventListener('click', () => {
   score = 0;
-  timeLeft = 10;
-  scoreDisplay.textContent = score;
-  timerDisplay.textContent = timeLeft;
-  clickBtn.disabled = false;
-  timerInterval = setInterval(updateTimer, 1000);
-}
-
-// Fonction pour mettre à jour le minuteur
-function updateTimer() {
-  timeLeft--;
-  timerDisplay.textContent = timeLeft;
-  if (timeLeft <= 0) {
-    clearInterval(timerInterval);
-    clickBtn.disabled = true;
-    alert(`Temps écoulé ! Votre score est ${score}`);
-    updateBestScore(score);
-  }
-}
-
-function applyDifficulty() {
-  const difficulty = localStorage.getItem('difficulty');
-  switch (difficulty) {
-    case 'easy':
-      document.body.style.backgroundColor = '#d3f8e2';
-      break;
-    case 'medium':
-      document.body.style.backgroundColor = '#f8e2d3';
-      break;
-    case 'hard':
-      document.body.style.backgroundColor = '#f8d3e2';
-      break;
-    default:
-      document.body.style.backgroundColor = '#ffffff';
-  }
-}
-const settingsForm = document.getElementById('settingsForm');
-const playerNameInput = document.getElementById('playerName');
-const difficultySelect = document.getElementById('difficulty');
-
-settingsForm.addEventListener('submit', saveSettings);
-
-function saveSettings(event) {
-  event.preventDefault();
-  const playerName = playerNameInput.value.trim();
-  difficulty = difficultySelect.value;
-  if (playerName) {
-    localStorage.setItem('playerName', playerName);
-  }
-  localStorage.setItem('difficulty', difficulty);
-  alert('Paramètres sauvegardés');
-}
-document.addEventListener('DOMContentLoaded', () => {
-  loadSettings();
-  applyDifficulty();
-  updateBestScoreDisplay();
+  updateScoreDisplay();
 });
 
-document.addEventListener('keydown', (event) => {
-  if (event.ctrlKey && event.altKey && event.key === 'E') {
-    document.body.style.backgroundColor = '#e2d3f8';
-    alert('Thème secret activé !');
-  }
-});
+
+window.theme = function() {
+  document.body.style.backgroundColor =
+    document.body.style.backgroundColor === 'black' ? '#222' : 'black';
+  console.log("🌙 Theme toggled! You found the Easter Egg!");
+};
