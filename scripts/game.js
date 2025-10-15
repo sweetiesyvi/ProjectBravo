@@ -1,30 +1,27 @@
 import { storage } from "./storage.js";
 
-const button = document.getElementById("clickButton");
-const scoreDisplay = document.getElementById("score");
+document.addEventListener("DOMContentLoaded", () => {
+  const button = document.getElementById("clickButton");
+  const scoreDisplay = document.getElementById("score");
 
-let score = 0;
-let highScore = storage.get("highScore", 0);
+  let score = 0;
+  let highScore = storage.get("highScore", 0);
 
-console.log(`Your current best score is ${highScore}. Try to beat it! 🔥`);
+  console.log(`Your best score is ${highScore}`);
 
-button.addEventListener("click", () => {
-  score++;
-  scoreDisplay.textContent = score;
+  button.addEventListener("click", () => {
+    score++;
+    scoreDisplay.textContent = score;
 
-  if (score > highScore) {
-    highScore = score;
-    storage.set("highScore", highScore);
-  }
+    if (score > highScore) {
+      highScore = score;
+      storage.set("highScore", highScore);
+    }
+  });
+
+  // Easter Egg
+  console.log("💡 Hint: type themeSwap() in console to switch theme.");
+  window.themeSwap = () => {
+    document.body.classList.toggle("alt-theme");
+  };
 });
-
-document.querySelector('a[href="#game"]').addEventListener("click", () => {
-  score = 0;
-  scoreDisplay.textContent = score;
-});
-
-console.log("💡 Hint: Type 'themeSwap()' in the console to change theme!");
-
-window.themeSwap = () => {
-  document.body.classList.toggle("alt-theme");
-};
