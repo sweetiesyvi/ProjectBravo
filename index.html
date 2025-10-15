@@ -3,22 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jeu Click Click</title>
+  <title>Click Frenzy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/game.css">
-<script type="module" src="scripts/game.js"></script>
-
 </head>
 <body>
-  <div id="game">
-    <h1>Jeu Click Click</h1>
-    <p>Temps restant : <span id="timer">10</span> secondes</p>
-    <p>Score : <span id="score">0</span></p>
-    <button id="startBtn">Démarrer</button>
-    <div id="clickArea" class="target" tabindex="0">
-      <span id="targetLabel">Cliquez ici !</span>
-    </div>
-    <p id="message"></p>
-  </div>
-  <script type="module" src="game.js"></script>
+  <header>
+    <nav>
+      <a href="#" id="startBtn">Démarrer</a>
+      <a href="#" id="resetBtn">Réinitialiser</a>
+      <a href="https://github.com/tonprofil" target="_blank">Mon Profil</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="gameArea">
+      <button id="clickBtn">Cliquez-moi !</button>
+      <p>Temps restant : <span id="timer">10</span> secondes</p>
+      <p>Score : <span id="score">0</span></p>
+      <p id="bestScore">Meilleur score : 0</p>
+    </section>
+
+    <section id="settings">
+      <h2>Paramètres</h2>
+      <form id="settingsForm">
+        <label for="playerName">Nom du joueur :</label>
+        <input type="text" id="playerName" name="playerName" required>
+        <label for="difficulty">Difficulté :</label>
+        <select id="difficulty" name="difficulty" required>
+          <option value="easy">Facile</option>
+          <option value="medium">Moyenne</option>
+          <option value="hard">Difficile</option>
+        </select>
+        <button type="submit">Sauvegarder</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="https://validator.w3.org/nu/?doc=https://tonprofil.github.io/click-frenzy/">Valider HTML</a> | <a href="https://wave.webaim.org/report#/https://tonprofil.github.io/click-frenzy/">Vérifier Accessibilité</a></p>
+  </footer>
+
+  <script type="module" src="scripts/game.js"></script>
+  <script type="module" src="scripts/storage.js"></script>
 </body>
 </html>
