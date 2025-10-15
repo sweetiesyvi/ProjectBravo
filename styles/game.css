@@ -1,38 +1,41 @@
-/* Styles principaux */
+:root {
+  --color-primary: #0d6efd;
+  --color-success: #198754;
+  --spacing: 1rem;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
 }
 
-/* Zone de jeu */
-#game-area {
-  background-color: #0d6efd;
-  transition: background-color 0.3s ease;
+button:focus {
+  outline: 3px solid var(--color-primary);
 }
 
-/* Couleurs selon état */
-#game-area.ready { background-color: #198754; }
-#game-area.too-soon { background-color: #ffc107; }
-
-/* CSS Variables */
-:root {
-  --main-color: #0d6efd;
-  --success-color: #198754;
-  --warning-color: #ffc107;
+#clickBtn {
+  transition: transform 0.2s ease;
 }
 
-/* Pseudo-classes et sélection avancée */
-#game-area:hover {
-  filter: brightness(1.1);
+#clickBtn:hover {
+  transform: scale(1.1);
 }
 
-/* Animation respect préférences */
-@media (prefers-reduced-motion: no-preference) {
-  #game-area {
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  #game-area:active {
-    transform: scale(0.95);
+@media (prefers-reduced-motion: reduce) {
+  #clickBtn {
+    transition: none;
   }
 }
+
+/* Advanced selectors */
+button.btn-success:nth-child(1) {
+  background-color: var(--color-success);
+}
+
+input[type="text"]:invalid {
+  border-color: red;
+}
+
+}
+
 
 
