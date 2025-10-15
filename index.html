@@ -4,47 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Click Frenzy</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles/game.css">
 </head>
 <body>
   <header>
-    <nav>
-      <a href="#" id="startBtn">Démarrer</a>
-      <a href="#" id="resetBtn">Réinitialiser</a>
-      <a href="https://github.com/tonprofil" target="_blank">Mon Profil</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Click Frenzy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <button class="btn btn-primary" id="startButton">Start Game</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-info" id="howToPlayButton" data-bs-toggle="modal" data-bs-target="#howToPlayModal">How to Play</button>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-secondary" href="https://github.com/yourusername" target="_blank">My GitHub</a>
+          </li>
+        </ul>
+      </div>
     </nav>
   </header>
 
-  <main>
-    <section id="gameArea">
-      <button id="clickBtn">Cliquez-moi !</button>
-      <p>Temps restant : <span id="timer">10</span> secondes</p>
-      <p>Score : <span id="score">0</span></p>
-      <p id="bestScore">Meilleur score : 0</p>
-    </section>
-
-    <section id="settings">
-      <h2>Paramètres</h2>
-      <form id="settingsForm">
-        <label for="playerName">Nom du joueur :</label>
-        <input type="text" id="playerName" name="playerName" required>
-        <label for="difficulty">Difficulté :</label>
-        <select id="difficulty" name="difficulty" required>
-          <option value="easy">Facile</option>
-          <option value="medium">Moyenne</option>
-          <option value="hard">Difficile</option>
-        </select>
-        <button type="submit">Sauvegarder</button>
-      </form>
-    </section>
+  <main class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Game Area</h2>
+        <p id="scoreDisplay">Score: 0</p>
+        <p id="timerDisplay">Time Left: 10</p>
+        <button class="btn btn-success" id="clickButton" disabled>Click Me!</button>
+      </div>
+    </div>
   </main>
 
-  <footer>
-    <p><a href="https://validator.w3.org/nu/?doc=https://tonprofil.github.io/click-frenzy/">Valider HTML</a> | <a href="https://wave.webaim.org/report#/https://tonprofil.github.io/click-frenzy/">Vérifier Accessibilité</a></p>
+  <footer class="bg-light text-center py-3">
+    <p>Developed by Your Name</p>
+    <p><a href="https://validator.w3.org/check?uri=referer" target="_blank">Validate HTML</a> | <a href="https://wave.webaim.org/report#/your-deployed-url" target="_blank">Check Accessibility</a></p>
   </footer>
 
-  <script type="module" src="scripts/game.js"></script>
-  <script type="module" src="scripts/storage.js"></script>
+  <!-- How to Play Modal -->
+  <div class="modal fade" id="howToPlayModal" tabindex="-1" aria-labelledby="howToPlayModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="howToPlayModalLabel">How to Play</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Click the "Click Me!" button as many times as you can before the timer runs out. The faster you click, the higher your score!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="scripts/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
