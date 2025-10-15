@@ -28,10 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
       startGame();
     }
     score++;
-    scoreDisplay.textContent = score;
+    console.log(scoreDisplay); 
 
   });
-console.log(scoreDisplay); 
+
 
   function startGame() {
     isPlaying = true;
@@ -66,4 +66,5 @@ console.log(scoreDisplay);
     document.body.classList.toggle("alt-theme");
   };
 });
+
 
