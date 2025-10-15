@@ -28,6 +28,14 @@ header, footer {
   text-align: center;
 }
 
+#timeLeft {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-top: 10px;
+}
+
+
 button {
   background-color: var(--secondary-color);
   border: none;
@@ -48,3 +56,4 @@ button:disabled {
 button:hover:not(:disabled) {
   background-color: #27ae60;
 }
+
