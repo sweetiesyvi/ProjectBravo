@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("clickButton");
   const scoreDisplay = document.getElementById("score");
 
+
   // Initialize game state
   let score = 0;
   let highScore = storage.get("highScore", 0);
@@ -28,7 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     score++;
     scoreDisplay.textContent = score;
+
   });
+console.log(scoreDisplay); 
 
   function startGame() {
     isPlaying = true;
@@ -63,3 +66,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("alt-theme");
   };
 });
+
