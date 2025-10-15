@@ -1,6 +1,12 @@
+* Import Google Font 
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+*/
+
 :root {
-  --primary-color: #ff6347;
-  --secondary-color: #fff;
+  --primary-color: #ff6347;  
+  --secondary-color: #fff;    
+  --accent-color: #4caf50;  
+  --spacing: 20px;    
   --font-family: 'Press Start 2P', cursive;
 }
 
@@ -9,61 +15,89 @@ body {
   background-color: #222;
   color: var(--secondary-color);
   text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+
 
 header, footer {
   background-color: var(--primary-color);
-  padding: 10px;
+  padding: var(--spacing);
 }
 
 nav a {
   color: var(--secondary-color);
-  margin: 0 15px;
+  margin: 0 10px;
   text-decoration: none;
+  transition: color 0.3s;
 }
 
-#gameArea {
-  margin-top: 50px;
+nav a:hover, nav a:focus {
+  color: var(--accent-color);
 }
+
+
+#game {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing);
+  padding: var(--spacing);
+}
+
 
 button {
   background-color: var(--primary-color);
   border: none;
   color: var(--secondary-color);
-  font-size: 20px;
-  padding: 20px;
+  font-size: 1.2rem;
+  padding: var(--spacing);
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 8px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
+
+button:hover, button:focus {
+  background-color: var(--accent-color);
+  transform: scale(1.05);
+}
+
+
 button:disabled {
-  background-color: #ccc;
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 600px) {
+  #game {
+    padding: 10px;
+  }
+
+  button {
+    width: 80%;
+  }
+}
+
+nav a:nth-child(2) {
+  font-weight: bold;
+}
+
+button[id^="click"] {
+  text-transform: uppercase;
+}
+
+button + p {
+  margin-top: 15px;
 }
 
 footer p {
   font-size: 14px;
-}
-
-form {
-  margin-top: 20px;
-}
-
-label, select, input {
-  margin: 5px;
-}
-
-input[type="text"], select {
-  padding: 5px;
-}
-
-button[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-button[type="submit"]:hover {
-  background-color: #45a049;
+  margin: 5px 0;
 }
