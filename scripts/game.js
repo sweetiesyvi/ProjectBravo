@@ -1,54 +1,87 @@
-// game.js
+import { saveScore, getBestScore, updateBestScore } from './storage.js';
 
-export let score = 0;
-export let timeLeft = 10;
-export let timerInterval;
+let score = 0;
+let timeLeft = 10;
+let timerInterval;
+let difficulty = 'easy';
 
-export function startGame() {
+const startBtn = document.getElementById('startBtn');
+const resetBtn = document.getElementById('resetBtn');
+const clickBtn = document.getElementById('clickBtn');
+const timerDisplay = document.getElementById('timer');
+const scoreDisplay = document.getElementById('score');
+const bestScoreDisplay = document.getElementById('bestScore');
+const settingsForm = document.getElementById('settingsForm');
+const playerNameInput = document.getElementById('playerName');
+const difficultySelect = document.getElementById('difficulty');
+
+startBtn.addEventListener('click', startGame);
+resetBtn.addEventListener('click', resetGame);
+clickBtn.addEventListener('click', incrementScore);
+settingsForm.addEventListener('submit', saveSettings);
+
+function startGame() {
   score = 0;
   timeLeft = 10;
-  updateScoreDisplay();
-  updateTimerDisplay();
-  clickButton.disabled = false;
+  scoreDisplay.textContent = score;
+  timerDisplay.textContent = timeLeft;
+  clickBtn.disabled = false;
   timerInterval = setInterval(updateTimer, 1000);
 }
 
 function updateTimer() {
   timeLeft--;
-  updateTimerDisplay();
+  timerDisplay.textContent = timeLeft;
   if (timeLeft <= 0) {
     clearInterval(timerInterval);
-    clickButton.disabled = true;
-    alert(`Time's up! Your score is ${score}`);
+    clickBtn.disabled = true;
+    alert(`Temps écoulé ! Votre score est ${score}`);
     updateBestScore(score);
   }
 }
 
-function updateScoreDisplay() {
+function incrementScore() {
+  score++;
   scoreDisplay.textContent = score;
 }
 
-function updateTimerDisplay() {
+function resetGame() {
+  clearInterval(timerInterval);
+  clickBtn.disabled = true;
+  score = 0;
+  timeLeft = 10;
+  scoreDisplay.textContent = score;
   timerDisplay.textContent = timeLeft;
 }
 
-function updateBestScore(currentScore) {
+function saveSettings(event) {
+  event.preventDefault();
+  const playerName = playerNameInput.value.trim();
+  difficulty = difficultySelect.value;
+  if (playerName) {
+    localStorage.setItem('playerName', playerName);
+  }
+  localStorage.setItem('difficulty', difficulty);
+  alert('Paramètres sauvegardés');
+}
+
+function loadSettings() {
+  const savedName = localStorage.getItem('playerName');
+  const savedDifficulty = localStorage.getItem('difficulty');
+  if (savedName) {
+    playerNameInput.value = savedName;
+  }
+  if (savedDifficulty) {
+    difficultySelect.value = savedDifficulty;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadSettings();
+  updateBestScoreDisplay();
+});
+
+function updateBestScoreDisplay() {
   const bestScore = getBestScore();
-  if (currentScore > bestScore) {
-    saveBestScore(currentScore);
-  }
-}
-
-function saveBestScore(score) {
-  if (typeof(Storage) !== 'undefined') {
-    localStorage.setItem('bestScore', score);
-  }
-}
-
-function getBestScore() {
-  if (typeof(Storage) !== 'undefined') {
-    const score = localStorage.getItem('bestScore');
-    return score ? parseInt(score, 10) : 0;
-  }
-  return 0;
+  bestScoreDisplay.textContent = `Meilleur score : ${bestScore}`;
 }
