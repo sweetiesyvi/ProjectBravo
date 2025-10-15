@@ -1,41 +1,50 @@
+/* Variables CSS */
 :root {
-  --color-primary: #0d6efd;
-  --color-success: #198754;
-  --spacing: 1rem;
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --font-family: 'Arial', sans-serif;
 }
 
+/* Styles de base */
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ecf0f1;
 }
 
-button:focus {
-  outline: 3px solid var(--color-primary);
+header, footer {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px;
+  text-align: center;
 }
 
-#clickBtn {
-  transition: transform 0.2s ease;
+#gameArea {
+  text-align: center;
 }
 
-#clickBtn:hover {
-  transform: scale(1.1);
+button {
+  background-color: var(--secondary-color);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px;
+  transition: background-color 0.3s;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  #clickBtn {
-    transition: none;
-  }
+button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
 }
 
-/* Advanced selectors */
-button.btn-success:nth-child(1) {
-  background-color: var(--color-success);
+button:hover:not(:disabled) {
+  background-color: #27ae60;
 }
-
-input[type="text"]:invalid {
-  border-color: red;
-}
-
-}
-
-
-
