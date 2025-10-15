@@ -1,69 +1,70 @@
-// Variables globales
-let score = 0;
-let timeLeft = 30;
-let timerInterval;
-let gameActive = false;
+export default class Game {
+  constructor({ selectors = {} } = {}) {
+    // ... (ton code existant)
 
-// Sélection des éléments DOM
-const startBtn = document.getElementById('startBtn');
-const resetBtn = document.getElementById('resetBtn');
-const clickBtn = document.getElementById('clickBtn');
-const timerDisplay = document.getElementById('timer');
-const scoreDisplay = document.getElementById('score');
-
-// Fonction pour démarrer le jeu
-function startGame() {
-  score = 0;
-  timeLeft = 30;
-  gameActive = true;
-  startBtn.disabled = true;
-  resetBtn.disabled = false;
-  clickBtn.disabled = false;
-  clickBtn.textContent = 'Cliquez-moi !';
-  updateScore();
-  updateTimer();
-  timerInterval = setInterval(updateTimer, 1000);
-}
-
-// Fonction pour réinitialiser le jeu
-function resetGame() {
-  clearInterval(timerInterval);
-  gameActive = false;
-  startBtn.disabled = false;
-  resetBtn.disabled = true;
-  clickBtn.disabled = true;
-  clickBtn.textContent = 'Cliquez-moi !';
-  timerDisplay.textContent = 'Temps restant : 30s';
-  scoreDisplay.textContent = 'Score : 0';
-}
-
-// Fonction pour mettre à jour le score
-function updateScore() {
-  scoreDisplay.textContent = `Score : ${score}`;
-}
-
-// Fonction pour mettre à jour le timer
-function updateTimer() {
-  if (timeLeft > 0) {
-    timeLeft--;
-    timerDisplay.textContent = `Temps restant : ${timeLeft}s`;
-  } else {
-    clearInterval(timerInterval);
-    gameActive = false;
-    clickBtn.disabled = true;
-    clickBtn.textContent = 'Temps écoulé !';
+    // Ajout de l'état pour le temps restant
+    this.state.timeLeft = 10; // Temps en secondes
+    this.state.timer = null;
+    this.state.gameOver = false;
   }
-}
 
-// Fonction pour gérer les clics sur le bouton
-function handleClick() {
-  if (gameActive) {
-    score++;
-    updateScore();
+  startRound() {
+    if (this.state.running || this.state.gameOver) return;
+
+    this.state.running = true;
+    this.state.gameOver = false;
+    this.state.timeLeft = 10;
+    this.updateUI();
+
+    this.startRoundBtn.disabled = true;
+    this.stopRoundBtn.disabled = false;
+    this.targetEl.classList.remove('ready');
+    this.targetEl.classList.add('wait');
+    this.targetLabel.textContent = 'Attendez le vert...';
+
+    // Démarrer le compte à rebours
+    this.state.timer = setInterval(() => {
+      this.state.timeLeft--;
+      this.updateUI();
+      if (this.state.timeLeft <= 0) {
+        clearInterval(this.state.timer);
+        this.state.gameOver = true;
+        this.stopRound();
+      }
+    }, 1000);
+
+    // Délai aléatoire avant que la cible devienne verte
+    const range = this.getDelayRange();
+    const ms = Math.floor(Math.random() * (range.max - range.min)) + range.min;
+    this.state.waitTimer = setTimeout(() => {
+      this.goSignal();
+    }, ms);
   }
-}
 
-// Événements
-startBtn.addEventListener('click', startGame);
-resetBtn.addEventListener('click', resetGame);
-clickBtn.addEventListener('click', handleClick);
+  stopRound() {
+    if (!this.state.running) return;
+
+    clearTimeout(this.state.waitTimer);
+    clearInterval(this.state.timer);
+    this.state.running = false;
+    this.state.gameOver = true;
+    this.startRoundBtn.disabled = false;
+    this.stopRoundBtn.disabled = true;
+    this.targetEl.classList.remove('wait', 'ready');
+    this.targetLabel.textContent = 'Arrêté';
+
+    this.announce('Jeu terminé.');
+  }
+
+  updateUI() {
+    super.updateUI(); // Appeler la méthode updateUI existante
+
+    // Mettre à jour le temps restant
+    const timeLeftEl = document.getElementById('timeLeft');
+    if (timeLeftEl) {
+      timeLeftEl.textContent = `Temps restant : ${this.state.timeLeft}s`;
+    }
+  }
+
+  // ... (ton code existant)
+}
