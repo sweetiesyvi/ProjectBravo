@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Start the game on first click
   button.addEventListener("click", () => {
-    if (!isPlaying) {
+    if (isPlaying) {
       startGame();
     }
     score++;
@@ -66,5 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("alt-theme");
   };
 });
+
 
 
